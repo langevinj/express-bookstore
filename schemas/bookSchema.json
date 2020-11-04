@@ -44,6 +44,7 @@
             "title": "The amazon_url schema",
             "description": "An explanation about the purpose of this instance.",
             "default": "",
+            "format": "uri",
             "examples": [
                 "http://a.co/eobPtX2"
             ]
@@ -101,6 +102,7 @@
         "year": {
             "$id": "#/properties/year",
             "type": "integer",
+            "maximum": 2020,
             "title": "The year schema",
             "description": "An explanation about the purpose of this instance.",
             "default": 0,
@@ -109,5 +111,5 @@
             ]
         }
     },
-    "additionalProperties": true
+    "additionalProperties": false
 }

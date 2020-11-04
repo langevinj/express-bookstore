@@ -42,7 +42,7 @@ router.post("/", async function (req, res, next) {
   }
 
   const book = await Book.create(req.body)
-  return res.json(book);
+  return res.json({book: book});
 });
 
 /** PUT /[isbn]   bookData => {book: updatedBook}  */
@@ -57,7 +57,7 @@ router.put("/:isbn", async function (req, res, next) {
   }
 
   const book = await Book.update(req.params.isbn, req.body);
-  return res.json(book)
+  return res.json({book: book})
 });
 
 /** DELETE /[isbn]   => {message: "Book deleted"} */
