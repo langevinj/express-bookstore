@@ -96,6 +96,37 @@ class Book {
     return result.rows[0];
   }
 
+  static async partialUpdate(isbn, data){
+    let arrayOfKeys = Object.keys(data);
+    let arrayForUpdate = []
+
+    for(let i=0; i < arrayOfKeys.length; i++){
+      arrayForUpdate.push(`${arrayOfKeys[i]}=($${i + 1})`)
+    }
+
+    let arrayForVariable = []
+    for (let x = 0; x < arrayOfKeys.length; x++) {
+      arrayForVariable.push(data[arrayOfKeys[x]])
+    }
+
+    let setString = arrayForUpdate.join(",");
+    const result = await db.query(
+      `UPDATE books SET
+        ${setString}
+        WHERE isbn='${isbn}'
+        RETURNING isbn,
+                  amazon_url,
+                  author,
+                  language,
+                  pages,
+                  publisher,
+                  title,
+                  year`, arrayForVariable
+    )
+
+    return result.rows[0];
+  }
+
   /** Update data with matching ID to data, return updated book.
 
    * {isbn, amazon_url, author, language, pages, publisher, title, year}
