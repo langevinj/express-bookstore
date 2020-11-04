@@ -124,6 +124,10 @@ class Book {
                   year`, arrayForVariable
     )
 
+    if (result.rows.length === 0) {
+      throw { message: `There is no book with an isbn '${isbn}`, status: 404 }
+    }
+    
     return result.rows[0];
   }
 
